@@ -19,6 +19,9 @@ const actions = {
 	},
 	clearStandards ({ state, commit }) {
 		commit('clearStandards')
+	},
+	setSelectedStandards ({ state, commit }, standards) {
+		commit('setSelectedStandards', { standards })
 	}
 }
 
@@ -33,6 +36,9 @@ const mutations = {
 	},
 	clearStandards(state) {
 		state.items = []
+	},
+	setSelectedStandards(state, { standards }) {
+		state.items = standards
 	}
 }
 

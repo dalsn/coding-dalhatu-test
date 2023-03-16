@@ -6,8 +6,9 @@
                     :id="index"
                     name="comments"
                     type="checkbox"
+                    :value="standard"
                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    @change="toggleStandard($event, index)"
+                    v-model="selectedStandards"
                 />
             </div>
             <div class="ml-3 text-sm leading-6">
@@ -19,20 +20,18 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+
     export default {
         props: ['standards'],
-        methods: {
-            addStandard (standard) {
-                this.$store.dispatch('standards/addItemToStandards', standard)
-            },
-            removeStandard (standard) {
-                this.$store.dispatch('standards/removeItemFromStandards', standard)
-            },
-            toggleStandard (event, standard) {
-                if (event.target.checked)
-                    this.addStandard(standard)
-                else
-                    this.removeStandard(standard)
+        computed: {
+            selectedStandards: {
+                get () {
+                    return this.$store.state.standards.items
+                },
+                set (value) {
+                    this.$store.dispatch('standards/setSelectedStandards', value)
+                }
             }
         }
     }
