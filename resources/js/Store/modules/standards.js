@@ -4,7 +4,7 @@ const state = () => ({
 
 // getters
 const getters = {
-	cartProducts: (state) => {
+	selectedStandards: (state) => {
 		return state.items;
 	}
 }
@@ -14,8 +14,11 @@ const actions = {
 	addItemToStandards ({ state, commit }, standard) {
 		commit('addItemToStandards', { standard })
 	},
-	removeItemFromStandards ({ state, commit }, index) {
-		commit('removeItemFromStandards', { index })
+	removeItemFromStandards ({ state, commit }, standard) {
+		commit('removeItemFromStandards', { standard })
+	},
+	clearStandards ({ state, commit }) {
+		commit('clearStandards')
 	}
 }
 
@@ -24,8 +27,12 @@ const mutations = {
 	addItemToStandards (state, { standard }) {
 		state.items.push(standard)
 	},
-	removeItemFromStandards (state, { index }) {
-		state.item.splice(index, 1)
+	removeItemFromStandards (state, { standard }) {
+		let index = state.items.indexOf(standard)
+		state.items.splice(index, 1)
+	},
+	clearStandards(state) {
+		state.items = []
 	}
 }
 

@@ -7,7 +7,7 @@
                     name="comments"
                     type="checkbox"
                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    @change="toggleStandard(standard)"
+                    @change="toggleStandard($event, index)"
                 />
             </div>
             <div class="ml-3 text-sm leading-6">
@@ -24,6 +24,15 @@
         methods: {
             addStandard (standard) {
                 this.$store.dispatch('standards/addItemToStandards', standard)
+            },
+            removeStandard (standard) {
+                this.$store.dispatch('standards/removeItemFromStandards', standard)
+            },
+            toggleStandard (event, standard) {
+                if (event.target.checked)
+                    this.addStandard(standard)
+                else
+                    this.removeStandard(standard)
             }
         }
     }
